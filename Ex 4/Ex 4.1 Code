@@ -1,0 +1,24 @@
+// Test Case: Analysis of a Discrete-Time Linear System
+
+// Define parameters
+N = 20; // Number of samples
+n = 0:N-1; // Discrete time index vector
+x_n = ones(1, N); // Input sequence: Unit step sequence
+y_n = zeros(1, N); // Output sequence initialization
+// Define the difference equation: y[n] = 0.5y[n-1] + x[n]
+for k = 2:N
+y_n(k) = 0.5 * y_n(k-1) + x_n(k);
+end
+// Plot the input sequence
+clf; // Clear the current figure
+subplot(2,1,1);
+plot2d (n, x_n);
+xlabel('n (Discrete Time Index)');
+ylabel('Amplitude');
+title('Input Sequence: Unit Step Sequence');
+// Plot the output sequence
+subplot(2,1,2);
+plot2d(n, y_n);
+xlabel('n (Discrete Time Index)');
+ylabel('Amplitude');
+title('Output Sequence: Response of the Discrete-Time System');
