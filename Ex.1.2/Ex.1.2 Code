@@ -1,0 +1,16 @@
+// Test Case: Discrete-Time Unit Impulse Signal Generation
+// Define parameters
+N = 21; // Length of the signal
+n0 = 11; // Index at which the impulse occurs
+n = 1:N; // Discrete time index vector
+// Generate the unit impulse signal
+x_n = zeros(1, N); // Initialize signal with zeros
+x_n(n0) = 1; // Set the impulse at the desired location
+// Plot the signal
+
+clf; // Clear the current figure
+plot2d(n, x_n);
+xlabel('n (Discrete Time Index)');
+ylabel('Amplitude');
+title('Discrete-Time Unit Impulse Signal');
+xtitle('Discrete-Time Unit Impulse Signal','n (Discrete Time Index)','Amplitude');
