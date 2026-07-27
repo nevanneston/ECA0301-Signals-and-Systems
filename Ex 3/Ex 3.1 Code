@@ -1,0 +1,43 @@
+// Test Case: Addition and Multiplication of Two Sequences
+// Define parameters
+N = 30; // Number of samples
+n = 0:N-1; // Discrete time index vector
+
+// Define Sequence 1: Sinusoidal sequence
+f1 = 0.05; // Frequency in cycles/sample
+A1 = 2; // Amplitude
+x1_n = A1 * sin(2 * %pi * f1 * n);
+// Define Sequence 2: Exponentially decaying sequence
+a2 = 0.1; // Base of the exponential decay
+A2 = 3; // Amplitude
+x2_n = A2 * exp(-a2 * n);
+// Addition of the two sequences
+x_add = x1_n + x2_n;
+// Multiplication of the two sequences
+x_mult = x1_n .* x2_n;
+// Plot the sequences and their results
+// Plot Sequence 1
+clf; // Clear the current figure
+subplot(4,1,1);
+stem(n, x1_n);
+xlabel('n (Discrete Time Index)');
+ylabel('Amplitude');
+title('Sequence 1: Sinusoidal Sequence');
+// Plot Sequence 2
+subplot(4,1,2);
+stem(n, x2_n);
+xlabel('n (Discrete Time Index)');
+ylabel('Amplitude');
+title('Sequence 2: Exponentially Decaying Sequence');
+// Plot the result of addition
+subplot(4,1,3);
+stem(n, x_add);
+xlabel('n (Discrete Time Index)');
+ylabel('Amplitude');
+title('Addition of Sequence 1 and Sequence 2');
+// Plot the result of multiplication
+subplot(4,1,4);
+stem(n, x_mult);
+xlabel('n (Discrete Time Index)');
+ylabel('Amplitude');
+title('Multiplication of Sequence 1 and Sequence 2');
