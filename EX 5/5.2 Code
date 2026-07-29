@@ -1,0 +1,27 @@
+// Test Case: Step Response of a Discrete-Time System
+// Define the length of the signal
+N = 20; // Length of the signal
+// Define the input signal (step function)
+u_n = ones(1, N); // Step function
+// Define the system parameters
+b = [1]; // Numerator coefficients of the system (input)
+a = [1, -0.5]; // Denominator coefficients of the system (output)
+// Compute the system’s response to the step input
+y_n = filter(b, a, u_n); // System output for step input
+// Define the time index for the signals
+n = 0:N-1; // Time index
+// Plot the step input and system response
+clf; // Clear the current figure
+
+// Plot step input
+subplot(2,1,1);
+bar(n, u_n, 'b');
+xlabel('n');
+ylabel('u[n]');
+title('Step Input Signal');
+// Plot system response to step input
+subplot(2,1,2);
+bar(n, y_n, 'r');
+xlabel('n');
+ylabel('y[n]');
+title('Step Response of the System');
