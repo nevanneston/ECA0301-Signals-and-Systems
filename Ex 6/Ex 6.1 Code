@@ -1,0 +1,34 @@
+// Test Case: Convolution of Continuous-Time Signals
+
+// Define time range and sampling interval
+t_min = -5; // Start time
+t_max = 5; // End time
+dt = 0.01; // Time step
+t = t_min:dt:t_max; // Time vector
+// Define Signal 1: Rectangular pulse of width 2 centered at t = 0
+x_t = (t >= -1) .* (t <= 1);
+// Define Signal 2: Exponential decay function
+h_t = exp(-t) .* (t >= 0); // Exponential decay, causal
+// Perform the convolution
+y_t = conv(x_t, h_t) * dt; // Multiply by dt to scale correctly
+// Adjust the time vector for the convolution result
+t_conv = (2 * t_min):dt:(2 * t_max);
+// Plot Signal 1
+clf; // Clear the current figure
+subplot(3,1,1);
+plot(t, x_t, 'b');
+xlabel('t');
+ylabel('x(t)');
+title('Signal 1: Rectangular Pulse');
+// Plot Signal 2
+subplot(3,1,2);
+plot(t, h_t, 'g');
+xlabel('t');
+ylabel('h(t)');
+title('Signal 2: Exponential Decay');
+// Plot the Convolution Result
+subplot(3,1,3);
+plot(t_conv, y_t, 'r');
+xlabel('t');
+ylabel('y(t)');
+title('Convolution of x(t) and h(t)');
