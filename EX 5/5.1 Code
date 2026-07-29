@@ -1,0 +1,33 @@
+// Test Case: Impulse Response of a Continuous-Time System
+// Define time range and sampling interval
+t_min = -1; // Start time
+t_max = 5; // End time
+dt = 0.01; // Time step
+t = t_min:dt:t_max; // Time vector
+// Define the impulse function
+x_impulse = zeros(1, length(t));
+x_impulse(t == 0) = 1; // Approximate impulse function
+// Initialize the output signal with zeros
+y_impulse = zeros(1, length(t));
+// Define the system parameters
+a = 2; // Coefficient for y(t)
+b = 1; // Coefficient for x(t)
+// Compute the impulse response using the Laplace Transform approach
+// Analytical solution: y(t) = (b/a) * exp(-a*t) for t >= 0
+for i = 1:length(t)
+if t(i) >= 0
+y_impulse(i) = (b / a) * exp(-a * t(i));
+end
+end
+// Plot the input and output signals for impulse response
+clf; // Clear the current figure
+subplot(2,1,1);
+plot(t, x_impulse, 'b');
+xlabel('t (Time)');
+ylabel('x(t)');
+title('Input Signal x(t) - Impulse Function');
+subplot(2,1,2);
+plot(t, y_impulse, 'r');
+xlabel('t (Time)');
+ylabel('y(t)');
+title('Impulse Response y(t) of the System');
