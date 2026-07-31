@@ -1,0 +1,31 @@
+// Define the coefficients of the transfer function
+b = [1, -0.5]; // Numerator coefficients (zeros)
+a = [1, -1.2, 0.32]; // Denominator coefficients (poles)
+// Calculate poles and zeros
+z = roots(b); // Calculate zeros
+p = roots(a); // Calculate poles
+// Plotting the poles and zeros manually
+// Create a new figure
+clf;
+xgrid();
+re = -2:0.01:2; // Real axis range
+im = -2:0.01:2; // Imaginary axis range
+plot(re, zeros(re), '-k'); // Real axis
+plot(zeros(im), im, '-k'); // Imaginary axis
+// Plot unit circle
+theta = linspace(0, 2*%pi, 100);
+unit_circle_x = cos(theta);
+unit_circle_y = sin(theta);
+plot(unit_circle_x, unit_circle_y, '--r'); // Unit circle
+// Plot zeros
+plot(real(z), imag(z), 'go'); // Zeros as green circles
+// Plot poles
+plot(real(p), imag(p), 'rx'); // Poles as red crosses
+// Customize the plot
+xlabel('Real Part');
+ylabel('Imaginary Part');
+title('Manual Pole-Zero Plot');
+
+legend(["Real Axis", "Imaginary Axis", "Unit Circle", "Zeros", "Poles"], "location",
+"northwest");
+xgrid();
