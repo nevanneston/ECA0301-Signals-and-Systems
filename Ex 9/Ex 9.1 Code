@@ -1,0 +1,44 @@
+// Test Case: Discrete Fourier Transform (DFT) of a Discrete-Time Signal
+// Define the discrete time signal
+x_n = [1, 2, 3, 4]; // Signal x[n]
+// Compute the Discrete Fourier Transform (DFT)
+X_k = fft(x_n); // Compute the DFT using Scilab's fft function
+// Define the frequency axis
+N = length(x_n); // Number of points in the DFT
+k = 0:N-1; // Frequency index
+// Initialize arrays to store magnitude and phase
+magnitude = abs(X_k); // Compute magnitude of DFT
+phase = zeros(1, N); // Initialize phase array
+// Compute phase manually using atan
+for i = 1:N
+real_part = real(X_k(i));
+imag_part = imag(X_k(i));
+if real_part > 0 then
+phase(i) = atan(imag_part / real_part); // Phase in [ -pi/2, pi/2 ]
+elseif real_part < 0 then
+phase(i) = atan(imag_part / real_part) + %pi; // Adjust phase for left half-plane
+else
+if imag_part > 0 then
+phase(i) = %pi/2; // Positive imaginary axis
+elseif imag_part < 0 then
+phase(i) = -%pi/2; // Negative imaginary axis
+else
+phase(i) = 0; // Origin case
+end
+end
+end
+// Plot the magnitude and phase of the DFT
+clf; // Clear the current figure
+// Plot magnitude
+subplot(2,1,1);
+bar(k, magnitude, 'b');
+xlabel('k');
+ylabel('|X(k)|');
+title('Magnitude of the DFT');
+// Plot phase
+subplot(2,1,2);
+bar(k, phase, 'r');
+xlabel('k');
+
+ylabel('Angle(X(k))');
+title('Phase of the DFT');
