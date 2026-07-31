@@ -1,0 +1,37 @@
+(Requires Symbolic Toolbox)
+// =======================
+// Numerical Z-Transform
+// =======================
+// Given sequence (example)
+x = [1, 0.5, 0.25, 0.125]; // length L
+N = 64; // Number of points for DFT
+n = 0:length(x)-1;
+// Define z-points on unit circle (frequency domain)
+k = 0:N-1;
+omega = 2 * %pi * k / N;
+z = exp(%i * omega); // unit circle points
+// Compute Z-transform on unit circle (DTFT)
+Xz = zeros(1, N);
+for m = 1:N
+
+Xz(m) = sum(x .* (z(m) .^ (-n)));
+end
+// Plot Magnitude and Phase
+clf;
+subplot(2,1,1);
+plot(omega/(2*%pi), abs(Xz));
+xtitle("Magnitude Spectrum", "Normalized Frequency", "|X(z)|");
+subplot(2,1,2);
+plot(omega/(2*%pi), atan(imag(Xz)./real(Xz)));
+xtitle("Phase Spectrum", "Normalized Frequency", "Phase (rad)");
+
+// =======================
+// Numerical Inverse Z-Transform
+// =======================
+// We use inverse DFT to recover x[n]
+x_rec = zeros(1, N);
+for m = 1:N
+x_rec(m) = (1/N) * sum(Xz .* (z .^ (n(m))));
+end
+disp("Recovered sequence from Inverse Z-Transform:");
+disp(real(x_rec(1:length(x))));
